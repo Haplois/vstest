@@ -9,22 +9,13 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities
     /// <summary>
     /// Sends output to the console.
     /// </summary>
-    public class ConsoleOutput : IOutput
+    public partial class ConsoleOutput : IOutput
     {
         private static object lockObject = new object();
         private static ConsoleOutput consoleOutput = null;
 
         private TextWriter standardOutput = null;
         private TextWriter standardError = null;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleOutput"/> class.
-        /// </summary>
-        internal ConsoleOutput()
-        {
-            this.standardOutput = Console.Out;
-            this.standardError = Console.Error;
-        }
 
         /// <summary>
         /// Gets the instance of <see cref="ConsoleOutput"/>.

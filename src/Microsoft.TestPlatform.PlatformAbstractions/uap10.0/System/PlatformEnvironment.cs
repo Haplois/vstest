@@ -65,5 +65,8 @@ namespace Microsoft.VisualStudio.TestPlatform.PlatformAbstractions
         {
             return Environment.CurrentManagedThreadId;
         }
+
+        /// <inheritdoc />
+        public string GetEnvironmentVariable(string variable) => Environment.GetEnvironmentVariable(variable);
     }
 }

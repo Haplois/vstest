@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright(c) Microsoft Corporation.All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces
@@ -7,23 +7,19 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces
     using System.Collections.Generic;
     using System.IO;
 
-    /// <summary>
-    /// The FileHelper interface.
-    /// </summary>
     public interface IFileHelper
     {
+        /// <summary>
+        /// Gets a platform-specific separator character used to separate path strings in environment variables.
+        /// </summary>
+        char PathSeparator { get; }
+
         /// <summary>
         /// Creates a directory.
         /// </summary>
         /// <param name="path">Path of the directory.</param>
-        /// <returns><see cref="DirectoryInfo"/> for the created directory.</returns>
-        DirectoryInfo CreateDirectory(string path);
-
-        /// <summary>
-        /// Gets the current directory
-        /// </summary>
-        /// <returns>Current directory</returns>
-        string GetCurrentDirectory();
+        /// <returns>Path of the created directory.</returns>
+        string CreateDirectory(string path);
 
         /// <summary>
         /// Exists utility to check if file exists (case sensitive).
@@ -31,6 +27,12 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces
         /// <param name="path"> The path of file. </param>
         /// <returns>True if file exists <see cref="bool"/>.</returns>
         bool Exists(string path);
+
+        /// <summary>
+        /// Gets the current directory
+        /// </summary>
+        /// <returns>Current directory</returns>
+        string GetCurrentDirectory();
 
         /// <summary>
         /// Exists utility to check if directory exists (case sensitive).
@@ -137,7 +139,7 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces
         /// <summary>
         /// Deletes the specified file
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
         void Delete(string path);
     }
 }

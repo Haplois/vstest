@@ -6,13 +6,13 @@
   <Import Project="$(TestPlatformRoot)scripts/build/TestPlatform.Settings.targets" />
   <PropertyGroup>
     <AssemblyName>Microsoft.TestPlatform.PlatformAbstractions</AssemblyName>
-    <TargetFrameworks>netcoreapp2.1;net451;uap10.0;netstandard2.0</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(DotNetBuildFromSource)' == 'true' ">netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;net451;uap10.0;netstandard1.0;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(DotNetBuildFromSource)' == 'true' ">netstandard1.0;netcoreapp2.1;netstandard1.3;netstandard2.0</TargetFrameworks>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EnableCodeAnalysis>true</EnableCodeAnalysis>
     <NoWarn>NU1605</NoWarn>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'uap10.0'">
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <NugetTargetMoniker>UAP,Version=v10.0</NugetTargetMoniker>
@@ -27,14 +27,25 @@
     <TargetFrameworkIdentifier Condition="'$(OS)' != 'Windows_NT'">.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion Condition="'$(OS)' != 'Windows_NT'">v4.5.1</TargetFrameworkVersion>
   </PropertyGroup>
-    
+
   <ItemGroup>
     <Compile Include="Interfaces\**\*.cs" />
     <Compile Include="Properties\**\*.cs" />
   </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <Compile Include="netstandard\**\*.cs" />
+    <Compile Include="netstandard1_3\**\*.cs" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <Compile Include="netstandard\**\*.cs" />
+    <Compile Include="netstandard1_3\**\*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
+    <Compile Include="netstandard\**\*.cs" />
+    <Compile Include="netstandard1_0\**\*.cs" />
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
     <Compile Include="netcore\**\*.cs" />
     <Compile Include="common\**\*.cs" />
@@ -76,6 +87,13 @@
       <Version>5.1.0</Version>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <PackageReference Include="System.Diagnostics.FileVersionInfo">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
   <PropertyGroup Label="Configuration">
     <RootNamespace>Microsoft.TestPlatform.PlatformAbstractions</RootNamespace>
   </PropertyGroup>

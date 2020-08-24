@@ -9,17 +9,17 @@ namespace Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces
     public interface IEnvironment
     {
         /// <summary>
-        /// Operating System architecture.
+        /// Gets the Operating System architecture.
         /// </summary>
         PlatformArchitecture Architecture { get; }
 
         /// <summary>
-        /// Operating System name.
+        /// Gets the Operating System name.
         /// </summary>
         PlatformOperatingSystem OperatingSystem { get; }
 
         /// <summary>
-        /// Operating System Version
+        /// Gets the Operating System version
         /// </summary>
         string OperatingSystemVersion { get; }
 
@@ -34,5 +34,12 @@ namespace Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces
         /// </summary>
         /// <returns>Returns the thread Id</returns>
         int GetCurrentManagedThreadId();
+
+        /// <summary>
+        /// Retrieves the value of an environment variable from the current process.
+        /// </summary>
+        /// <param name="variable">The name of the environment variable.</param>
+        /// <returns>The value of the environment variable specified by variable, or null if the environment variable is not found.</returns>
+        string GetEnvironmentVariable(string variable);
     }
 }

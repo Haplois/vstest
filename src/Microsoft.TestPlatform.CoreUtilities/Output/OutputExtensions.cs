@@ -54,7 +54,14 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities
         /// <param name="args">Arguments to format into the format string.</param>
         public static void Information(this IOutput output, bool appendPrefix, string format, params object[] args)
         {
-            Information(output, appendPrefix, Console.ForegroundColor, format, args);
+            var foregroundColor =
+#if NETSTANDARD1_0
+            ConsoleColor.White;
+#else
+            Console.ForegroundColor;
+#endif
+
+            Information(output, appendPrefix, foregroundColor, format, args);
         }
 
         /// <summary>
@@ -140,6 +147,10 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities
                 return;
             }
 
+#if NETSTANDARD1_0
+            // No support for console output, just execute action.
+            action.Invoke();
+#else
             var previousForegroundColor = Console.ForegroundColor;
             try
             {
@@ -150,6 +161,7 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities
             {
                 Console.ForegroundColor = previousForegroundColor;
             }
+#endif
         }
     }
 }

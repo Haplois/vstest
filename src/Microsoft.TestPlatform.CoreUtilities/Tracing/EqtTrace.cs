@@ -50,7 +50,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
 #endif
 
-#if NETSTANDARD2_0
+#if NETSTANDARD
         public static PlatformTraceLevel TraceLevel
         {
             get
@@ -175,7 +175,13 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         public static void Fail(string message)
         {
             Error(message);
+
+#if NETSTANDARD1_0
+            // Debug.Fail fallback.
+            Debug.Assert(false, message);
+#else
             Debug.Fail(message);
+#endif
         }
 
         /// <summary>
@@ -190,7 +196,12 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             string message = string.Format(CultureInfo.InvariantCulture, format, args);
             Error(message);
 #if DEBUG
+#if NETSTANDARD1_0
+            // Debug.Fail fallback.
+            Debug.Assert(false, message);
+#else
             Debug.Fail(message);
+#endif
 #endif
         }
 
@@ -328,7 +339,12 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             Debug.Assert(format != null, "format != null");
             var message = string.Format(CultureInfo.InvariantCulture, format, args);
             Error(message);
+#if NETSTANDARD1_0
+            // Debug.Fail fallback.
+            Debug.Assert(false, message);
+#else
             Debug.Fail(message);
+#endif
         }
 
         /// <summary>
@@ -806,7 +822,12 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
                     Verbose(message);
                     break;
                 default:
+#if NETSTANDARD1_0
+                    // Debug.Fail fallback.
+                    Debug.Assert(false, "We should never get here!");
+#else
                     Debug.Fail("We should never get here!");
+#endif
                     break;
             }
         }

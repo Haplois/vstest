@@ -4,6 +4,8 @@
 namespace Microsoft.VisualStudio.TestPlatform.CoreUtilities.Helpers
 {
     using System;
+    using System.Linq;
+    using System.Reflection;
     using ObjectModel;
 
     public class EnvironmentHelper
@@ -16,7 +18,13 @@ namespace Microsoft.VisualStudio.TestPlatform.CoreUtilities.Helpers
         /// </summary>
         public static int GetConnectionTimeout()
         {
-            var envVarValue = Environment.GetEnvironmentVariable(EnvironmentHelper.VstestConnectionTimeout);
+            var envVarValue =
+#if NETSTANDARD1_0
+                DefaultConnectionTimeout.ToString();
+#else
+                Environment.GetEnvironmentVariable(EnvironmentHelper.VstestConnectionTimeout);
+#endif
+
             if (!string.IsNullOrEmpty(envVarValue) && int.TryParse(envVarValue, out int value) && value >= 0)
             {
                 EqtTrace.Info("EnvironmentHelper.GetConnectionTimeout: {0} value set to {1}.", EnvironmentHelper.VstestConnectionTimeout, value);

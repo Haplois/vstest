@@ -73,8 +73,8 @@ namespace Microsoft.VisualStudio.TestPlatform.CrossPlatEngine.Helpers
             }
 
             executablePath = string.Empty;
-            var pathString = Environment.GetEnvironmentVariable("PATH");
-            foreach (string path in pathString.Split(Path.PathSeparator))
+            var pathString = this.environment.GetEnvironmentVariable("PATH");
+            foreach (string path in pathString.Split(fileHelper.PathSeparator))
             {
                 string exeFullPath = Path.Combine(path.Trim(), executableBaseName);
                 if (this.fileHelper.Exists(exeFullPath))

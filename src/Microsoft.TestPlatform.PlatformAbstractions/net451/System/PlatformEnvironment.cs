@@ -4,11 +4,12 @@
 namespace Microsoft.VisualStudio.TestPlatform.PlatformAbstractions
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Threading;
     using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 
     /// <inheritdoc />
-    public class PlatformEnvironment : IEnvironment
+    public partial class PlatformEnvironment : IEnvironment
     {
         /// <inheritdoc />
         public PlatformArchitecture Architecture
@@ -61,5 +62,8 @@ namespace Microsoft.VisualStudio.TestPlatform.PlatformAbstractions
         {
             return Thread.CurrentThread.ManagedThreadId;
         }
+
+        /// <inheritdoc />
+        public string GetEnvironmentVariable(string variable) => Environment.GetEnvironmentVariable(variable);
     }
 }

@@ -11,17 +11,18 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities.Helpers
 
     using Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces;
 
-    /// <summary>
-    /// The file helper.
-    /// </summary>
+    /// <inheritdoc/>
     public class FileHelper : IFileHelper
     {
         private static readonly Version DefaultFileVersion = new Version(0, 0);
 
         /// <inheritdoc/>
-        public DirectoryInfo CreateDirectory(string path)
+        public char PathSeparator => Path.PathSeparator;
+
+        /// <inheritdoc/>
+        public string CreateDirectory(string path)
         {
-            return Directory.CreateDirectory(path);
+            return Directory.CreateDirectory(path).FullName;
         }
 
         /// <inheritdoc/>
@@ -53,7 +54,6 @@ namespace Microsoft.VisualStudio.TestPlatform.Utilities.Helpers
         {
             return new FileStream(filePath, mode, access, share);
         }
-
 
         /// <inheritdoc/>
         public IEnumerable<string> EnumerateFiles(
