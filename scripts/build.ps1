@@ -38,7 +38,7 @@ Param(
     [Alias("ci")]
     [Switch] $CIBuild = $false,
 
-	[Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$false)]
     [Alias("pt")]
     [Switch] $PublishTestArtifacts = $false,
 
@@ -317,7 +317,7 @@ function Publish-Package
     Write-Log "Package: Publish src\vstest.console\vstest.console.csproj"
     Publish-PackageInternal $vstestConsoleProject $TPB_TargetFramework $fullCLRPackageDir
     Publish-PackageInternal $vstestConsoleProject $TPB_TargetFrameworkCore20 $coreCLR20PackageDir
-	
+    
     Write-Log "Package: Publish src\SettingsMigrator\SettingsMigrator.csproj"
     Publish-PackageInternal $settingsMigratorProject $TPB_TargetFramework $fullCLRPackageDir
 
@@ -518,30 +518,30 @@ function Publish-Package
 
 function Publish-Tests
 {
-	if($TPB_PublishTests)	
-	{
-		$dotnetExe = Get-DotNetPath
-		Write-Log "Publish-Tests: Started."
+    if($TPB_PublishTests)	
+    {
+        $dotnetExe = Get-DotNetPath
+        Write-Log "Publish-Tests: Started."
 
-		# Adding only Perf project for now
-		$fullCLRTestDir = Join-Path $env:TP_TESTARTIFACTS "$TPB_Configuration\$TPB_TargetFramework"
-		$fullCLRPerfTestAssetDir = Join-Path $env:TP_TESTARTIFACTS "$TPB_Configuration\$TPB_TargetFramework\TestAssets\PerfAssets"
+        # Adding only Perf project for now
+        $fullCLRTestDir = Join-Path $env:TP_TESTARTIFACTS "$TPB_Configuration\$TPB_TargetFramework"
+        $fullCLRPerfTestAssetDir = Join-Path $env:TP_TESTARTIFACTS "$TPB_Configuration\$TPB_TargetFramework\TestAssets\PerfAssets"
     
-		$mstest10kPerfProjectDir = Join-Path $fullCLRPerfTestAssetDir "MSTestAdapterPerfTestProject"
-		$mstest10kPerfProject = Join-Path $env:TP_ROOT_DIR "test\TestAssets\PerfAssets\MSTestAdapterPerfTestProject"
-		Publish-PackageInternal $mstest10kPerfProject $TPB_TargetFramework $mstest10kPerfProjectDir
+        $mstest10kPerfProjectDir = Join-Path $fullCLRPerfTestAssetDir "MSTestAdapterPerfTestProject"
+        $mstest10kPerfProject = Join-Path $env:TP_ROOT_DIR "test\TestAssets\PerfAssets\MSTestAdapterPerfTestProject"
+        Publish-PackageInternal $mstest10kPerfProject $TPB_TargetFramework $mstest10kPerfProjectDir
 
-		$nunittest10kPerfProjectDir = Join-Path $fullCLRPerfTestAssetDir "NUnitAdapterPerfTestProject"
-		$nunittest10kPerfProject = Join-Path $env:TP_ROOT_DIR "test\TestAssets\PerfAssets\NUnitAdapterPerfTestProject"
-		Publish-PackageInternal $nunittest10kPerfProject $TPB_TargetFramework $nunittest10kPerfProjectDir
+        $nunittest10kPerfProjectDir = Join-Path $fullCLRPerfTestAssetDir "NUnitAdapterPerfTestProject"
+        $nunittest10kPerfProject = Join-Path $env:TP_ROOT_DIR "test\TestAssets\PerfAssets\NUnitAdapterPerfTestProject"
+        Publish-PackageInternal $nunittest10kPerfProject $TPB_TargetFramework $nunittest10kPerfProjectDir
 
-		$xunittest10kPerfProjectDir = Join-Path $fullCLRPerfTestAssetDir "XUnitAdapterPerfTestProject"
-		$xunittest10kPerfProject = Join-Path $env:TP_ROOT_DIR "test\TestAssets\PerfAssets\XUnitAdapterPerfTestProject"
-		Publish-PackageInternal $xunittest10kPerfProject $TPB_TargetFramework $xunittest10kPerfProjectDir
+        $xunittest10kPerfProjectDir = Join-Path $fullCLRPerfTestAssetDir "XUnitAdapterPerfTestProject"
+        $xunittest10kPerfProject = Join-Path $env:TP_ROOT_DIR "test\TestAssets\PerfAssets\XUnitAdapterPerfTestProject"
+        Publish-PackageInternal $xunittest10kPerfProject $TPB_TargetFramework $xunittest10kPerfProjectDir
 
-		$testPerfProject = Join-Path $env:TP_ROOT_DIR "test\Microsoft.TestPlatform.PerformanceTests"
-		Publish-PackageInternal $testPerfProject $TPB_TargetFramework $fullCLRTestDir
-	}
+        $testPerfProject = Join-Path $env:TP_ROOT_DIR "test\Microsoft.TestPlatform.PerformanceTests"
+        Publish-PackageInternal $testPerfProject $TPB_TargetFramework $fullCLRTestDir
+    }
 }
 
 function Publish-PackageInternal($packagename, $framework, $output)
@@ -562,26 +562,26 @@ function Publish-PackageWithRuntimeInternal($packagename, $framework, $runtime, 
 
 function Copy-Loc-Files($sourceDir, $destinationDir, $dllName)
 {
-	foreach($lang in $language) {
+    foreach($lang in $language) {
         $dllToCopy = Join-Path $sourceDir\$lang $dllName
         $destinationFolder = Join-Path $destinationDir $lang
         if (-not (Test-Path $destinationFolder)) {
             New-Item $destinationFolder -Type Directory -Force | Out-Null
         }
         Copy-Item $dllToCopy $destinationFolder -Force
-	}
+    }
 }
 
 function Move-Loc-Files($sourceDir, $destinationDir, $dllName)
 {
-	foreach($lang in $language) {
+    foreach($lang in $language) {
         $dllToCopy = Join-Path $sourceDir\$lang $dllName
         $destinationFolder = Join-Path $destinationDir $lang
         if (-not (Test-Path $destinationFolder)) {
             New-Item $destinationFolder -Type Directory -Force | Out-Null
         }
         Move-Item $dllToCopy $destinationFolder -Force
-	}
+    }
 }
 
 function Create-VsixPackage
@@ -613,7 +613,7 @@ function Create-VsixPackage
     $legacyDir = Join-Path $env:TP_PACKAGES_DIR "Microsoft.VisualStudio.QualityTools.DataCollectors\$testPlatformExternalsVersion\contentFiles\any\any"
     Copy-Item -Recurse $legacyDir\* $packageDir -Force
 
-	# Copy CUIT Related depedencies
+    # Copy CUIT Related depedencies
     $legacyDir = Join-Path $env:TP_PACKAGES_DIR "Microsoft.VisualStudio.CUIT\$testPlatformExternalsVersion\contentFiles\any\any"
     Copy-Item -Recurse $legacyDir\* $packageDir -Force
 
@@ -628,7 +628,7 @@ function Create-VsixPackage
     }
     Copy-Item -Recurse $comComponentsDirectoryTIA\* $testImpactComComponentsDir -Force
 
-	if (-not (Test-Path $legacyTestImpactComComponentsDir)) {
+    if (-not (Test-Path $legacyTestImpactComComponentsDir)) {
         New-Item $legacyTestImpactComComponentsDir -Type Directory -Force | Out-Null
     }
     Copy-Item -Recurse $comComponentsDirectoryTIA\* $legacyTestImpactComComponentsDir -Force
@@ -667,7 +667,7 @@ function Create-NugetPackages
 
     Write-Log "Create-NugetPackages: Started."
     $stagingDir = Join-Path $env:TP_OUT_DIR $TPB_Configuration
-	$packageOutputDir = $TPB_PackageOutDir
+    $packageOutputDir = $TPB_PackageOutDir
 
     if (-not (Test-Path $packageOutputDir)) {
         New-Item $packageOutputDir -type directory -Force
@@ -705,8 +705,8 @@ function Create-NugetPackages
     $testhostUapPackageDir = $(Join-Path $env:TP_OUT_DIR "$TPB_Configuration\Microsoft.TestPlatform.TestHost\$TPB_TargetFrameworkUap")
     Copy-Item $tpNuspecDir\uap\"Microsoft.TestPlatform.TestHost.Uap.props" $testhostUapPackageDir\Microsoft.TestPlatform.TestHost.props -Force
     Copy-Item $tpNuspecDir\uap\"Microsoft.TestPlatform.TestHost.Uap.targets" $testhostUapPackageDir\Microsoft.TestPlatform.TestHost.targets -Force
-	
-	$testhostCorePackageDir = $(Join-Path $env:TP_OUT_DIR "$TPB_Configuration\Microsoft.TestPlatform.TestHost\$TPB_TargetFrameworkCore20")
+    
+    $testhostCorePackageDir = $(Join-Path $env:TP_OUT_DIR "$TPB_Configuration\Microsoft.TestPlatform.TestHost\$TPB_TargetFrameworkCore20")
     Copy-Item $tpNuspecDir\"Microsoft.TestPlatform.TestHost.NetCore.props" $testhostCorePackageDir\Microsoft.TestPlatform.TestHost.props -Force
     
     # Call nuget pack on these components.

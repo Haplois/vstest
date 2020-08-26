@@ -3,8 +3,10 @@
 
 namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 {
-    using NuGet.Frameworks;
+#if !NETSTANDARD1_3
+    using  NuGet.Frameworks;
     using static NuGet.Frameworks.FrameworkConstants;
+#endif
 
     /// <summary>
     /// Class for target Framework for the test container
@@ -43,6 +45,10 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         /// <returns>A framework object</returns>
         public static Framework FromString(string frameworkString)
         {
+#if NETSTANDARD1_3
+            // NuGet.Frameworks package is not supported on NETSTANDARD 1.3
+            return null;
+#else
             if (string.IsNullOrWhiteSpace(frameworkString))
             {
                 return null;
@@ -83,6 +89,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             }
 
             return new Framework() { Name = nugetFramework.DotNetFrameworkName, Version = nugetFramework.Version.ToString() };
+#endif
         }
 
         /// <summary>

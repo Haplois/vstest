@@ -16,7 +16,7 @@ function Verify-Nuget-Packages($packageDirectory)
                      "Microsoft.NET.Test.Sdk" = 13;
                      "Microsoft.TestPlatform" = 469;
                      "Microsoft.TestPlatform.Build" = 19;
-                     "Microsoft.TestPlatform.CLI" = 350;
+                     "Microsoft.TestPlatform.CLI" = 351;
                      "Microsoft.TestPlatform.Extensions.TrxLogger" = 33;
                      "Microsoft.TestPlatform.ObjectModel" = 62;
                      "Microsoft.TestPlatform.Portable" = 566;
@@ -51,7 +51,7 @@ function Verify-Nuget-Packages($packageDirectory)
 
         if( $expectedNumOfFiles[$packageKey] -ne $actualNumOfFiles)
         {
-            Write-Error "Number of files are not equal $unzipNugetPackageDir, expected: $($expectedNumOfFiles[$packageKey]) actual: $actualNumOfFiles"
+            Write-Error "Number of files are not equal $unzipNugetPackageDir, expected: $($expectedNumOfFiles[$packageKey]) actual: $actualNumOfFiles (Package: $packageKey)"
         }
 
         Remove-Item -Force -Recurse $unzipNugetPackageDir | Out-Null

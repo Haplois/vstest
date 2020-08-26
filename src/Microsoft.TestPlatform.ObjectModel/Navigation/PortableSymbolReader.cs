@@ -102,7 +102,11 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel.Navigation
                     catch (FileNotFoundException)
                     {
                         // fallback when the assembly is not loaded
+#if NETSTANDARD1_3
+                        throw;
+#else
                         asm = Assembly.LoadFile(binaryPath);
+#endif
                     }
 
                     foreach (var type in asm.GetTypes())

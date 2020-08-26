@@ -7,20 +7,26 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
     using System.Collections.Generic;
     using System.Globalization;
     using System.Reflection;
+
+#if !NETSTANDARD1_0
     using System.Runtime.Serialization;
+#endif
 
     public delegate bool ValidateValueCallback(object value);
 
+
+#if !NETSTANDARD1_0
     [DataContract]
+#endif
     public class TestProperty : IEquatable<TestProperty>
     {
-        #region Fields
+#region Fields
 
         private Type valueType;
 
-        #endregion Fields
+#endregion Fields
 
-        #region Constructors
+#region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestProperty"/> class.
@@ -76,56 +82,70 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             this.valueType = valueType;
         }
 
-        #endregion Constructors
+#endregion Constructors
 
-        #region Properties
+#region Properties
 
         /// <summary>
         /// Gets or sets the Id for the property.
         /// </summary>
+#if !NETSTANDARD1_0
         [DataMember]
+#endif
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets a label for the property.
         /// </summary>
+#if !NETSTANDARD1_0
         [DataMember]
+#endif
         public string Label { get; set; }
 
         /// <summary>
         /// Gets or sets a category for the property.
         /// </summary>
+#if !NETSTANDARD1_0
         [DataMember]
+#endif
         public string Category { get; set; }
 
         /// <summary>
         /// Gets or sets a description for the property.
         /// </summary>
+#if !NETSTANDARD1_0
         [DataMember]
+#endif
         public string Description { get; set; }
 
         /// <summary>
         /// Gets the callback for validation of property value.
         /// </summary>
         /// <remarks>This property is not required at the client side.</remarks>
+#if !NETSTANDARD1_0
         [IgnoreDataMember]
+#endif
         public ValidateValueCallback ValidateValueCallback { get; }
 
         /// <summary>
         /// Gets or sets the attributes for this property.
         /// </summary>
+#if !NETSTANDARD1_0
         [DataMember]
+#endif
         public TestPropertyAttributes Attributes { get; set; }
 
         /// <summary>
         /// Gets or sets a string representation of the type for value.
         /// </summary>
+#if !NETSTANDARD1_0
         [DataMember]
+#endif
         public string ValueType { get; set; }
 
-        #endregion Properties
+#endregion Properties
 
-        #region IEquatable
+#region IEquatable
 
         /// <inheritdoc/>
         public override int GetHashCode()
@@ -145,9 +165,9 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             return (other != null) && (this.Id == other.Id);
         }
 
-        #endregion IEquatable
+#endregion IEquatable
 
-        #region Methods
+#region Methods
 
         /// <inheritdoc/>
         public override string ToString()
@@ -248,9 +268,9 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             return type;
         }
 
-        #endregion Methods
+#endregion Methods
 
-        #region Static Fields
+#region Static Fields
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.MSInternal", "CA908:AvoidTypesThatRequireJitCompilationInPrecompiledAssemblies")]
         private static Dictionary<string, KeyValuePair<TestProperty, HashSet<Type>>> s_properties = new Dictionary<string, KeyValuePair<TestProperty, HashSet<Type>>>();
@@ -260,9 +280,9 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         private static string s_windowsPhonePKT = "7cec85d7bea7798e";
 #endif
 
-        #endregion Static Fields
+#endregion Static Fields
 
-        #region Static Methods
+#region Static Methods
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.MSInternal", "CA908:AvoidTypesThatRequireJitCompilationInPrecompiledAssemblies")]
         public static void ClearRegisteredProperties()
@@ -385,6 +405,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
         #endregion Static Methods
 
+#if !NETSTANDARD1_0
         public object GetRealObject(StreamingContext context)
         {
             var registeredProperty = TestProperty.Find(this.Id);
@@ -403,5 +424,6 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
             return registeredProperty;
         }
+#endif
     }
 }

@@ -509,7 +509,12 @@ namespace Microsoft.VisualStudio.TestPlatform.Extensions.TrxLogger
             {
                 if (parametersDictionary.TryGetValue(DefaultLoggerParameterNames.TargetFramework, out var framework) && framework != null)
                 {
-                    framework = NuGetFramework.Parse(framework).GetShortFolderName();
+                    framework =
+#if NETSTANDARD1_0
+                        "netstandard1_0";
+#else
+                        NuGetFramework.Parse(framework).GetShortFolderName();
+#endif
                     logFilePrefixValue = logFilePrefixValue + "_" + framework;
                 }
 
@@ -758,6 +763,6 @@ namespace Microsoft.VisualStudio.TestPlatform.Extensions.TrxLogger
             return testEntry;
         }
 
-        #endregion
+#endregion
     }
 }
