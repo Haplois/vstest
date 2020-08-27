@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TestPlatformRoot Condition="$(TestPlatformRoot) == ''">..\..\</TestPlatformRoot>
+    <ProductProject>true</ProductProject>
   </PropertyGroup>
   <Import Project="$(TestPlatformRoot)scripts/build/TestPlatform.Settings.targets" />
   <PropertyGroup>
@@ -15,9 +16,11 @@
     <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="Resources\PrimitiveResources.resx" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Resources\PrimitiveResources.resx">
       <LastGenOutput>PrimitiveResources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
