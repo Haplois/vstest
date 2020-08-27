@@ -303,7 +303,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             TypeConverter converter = TypeDescriptor.GetConverter(valueType);
             if (converter == null)
             {
-                throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.Resources.ConverterNotSupported, valueType.Name));
+                throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.PrimitiveResources.ConverterNotSupported, valueType.Name));
             }
 
             try
@@ -351,7 +351,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
             if (converter == null)
             {
-                throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.Resources.ConverterNotSupported, valueType.Name));
+                throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.PrimitiveResources.ConverterNotSupported, valueType.Name));
             }
 
             try

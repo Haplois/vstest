@@ -22,19 +22,19 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             switch (outcome)
             {
                 case TestOutcome.None:
-                    result = Resources.Resources.TestOutcomeNone;
+                    result = Resources.PrimitiveResources.TestOutcomeNone;
                     break;
                 case TestOutcome.Passed:
-                    result = Resources.Resources.TestOutcomePassed;
+                    result = Resources.PrimitiveResources.TestOutcomePassed;
                     break;
                 case TestOutcome.Failed:
-                    result = Resources.Resources.TestOutcomeFailed;
+                    result = Resources.PrimitiveResources.TestOutcomeFailed;
                     break;
                 case TestOutcome.Skipped:
-                    result = Resources.Resources.TestOutcomeSkipped;
+                    result = Resources.PrimitiveResources.TestOutcomeSkipped;
                     break;
                 case TestOutcome.NotFound:
-                    result = Resources.Resources.TestOutcomeNotFound;
+                    result = Resources.PrimitiveResources.TestOutcomeNotFound;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("outcome");

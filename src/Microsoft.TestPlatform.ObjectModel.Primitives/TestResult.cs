@@ -133,7 +133,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             // Add the outcome of the test and the name of the test.
             result.AppendFormat(
                 CultureInfo.CurrentUICulture,
-                Resources.Resources.BasicTestResultFormat,
+                Resources.PrimitiveResources.BasicTestResultFormat,
                 this.TestCase.DisplayName,
                 TestOutcomeHelper.GetOutcomeString(this.Outcome));
 
@@ -142,7 +142,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
             {
                 // Add Error message.
                 result.AppendLine();
-                result.AppendFormat(CultureInfo.CurrentUICulture, Resources.Resources.TestFailureMessageFormat, this.ErrorMessage);
+                result.AppendFormat(CultureInfo.CurrentUICulture, Resources.PrimitiveResources.TestFailureMessageFormat, this.ErrorMessage);
 
                 // Add stack trace if we have one.
                 if (!string.IsNullOrWhiteSpace(this.ErrorStackTrace))
@@ -150,7 +150,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
                     result.AppendLine();
                     result.AppendFormat(
                         CultureInfo.CurrentUICulture,
-                        Resources.Resources.TestFailureStackTraceFormat,
+                        Resources.PrimitiveResources.TestFailureStackTraceFormat,
                         this.ErrorStackTrace);
                 }
             }
@@ -165,7 +165,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
                     {
                         testMessages.AppendFormat(
                             CultureInfo.CurrentUICulture,
-                            Resources.Resources.TestResultMessageFormat,
+                            Resources.PrimitiveResources.TestResultMessageFormat,
                             message.Category,
                             message.Text);
                     }
@@ -174,7 +174,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
                 result.AppendLine();
                 result.AppendFormat(
                     CultureInfo.CurrentUICulture,
-                    Resources.Resources.TestResultTextMessagesFormat,
+                    Resources.PrimitiveResources.TestResultTextMessagesFormat,
                     testMessages.ToString());
             }
 

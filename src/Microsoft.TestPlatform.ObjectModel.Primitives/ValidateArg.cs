@@ -11,7 +11,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
     using System.Globalization;
     using System.Linq;
 
-    using Microsoft.VisualStudio.TestPlatform.CoreUtilities.Resources;
+    using Resources = Microsoft.VisualStudio.TestPlatform.ObjectModel.Resources.PrimitiveResources;
 
     /// <summary>
     /// Helper to validate parameters.
@@ -108,7 +108,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         {
             if (arg < 0)
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentIsNegative);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentIsNegative);
                 throw new ArgumentOutOfRangeException(parameterName, arg, message);
             }
         }
@@ -124,7 +124,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         {
             if (arg < 0)
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentIsNegative);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentIsNegative);
                 throw new ArgumentOutOfRangeException(parameterName, arg, message);
             }
         }
@@ -142,7 +142,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
             if (!arg.Any())
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentIsEmpty);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentIsEmpty);
                 throw new ArgumentException(message, parameterName);
             }
         }
@@ -163,7 +163,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
             if (!(arg is T))
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentNotTypeOf, typeof(T).FullName);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentNotTypeOf, typeof(T).FullName);
                 throw new ArgumentException(message, parameterName);
             }
         }
@@ -186,7 +186,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         {
             if (arg == null)
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentPropertyIsNull, propertyName);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentPropertyIsNull, propertyName);
                 throw new ArgumentNullException(parameterName, message);
             }
         }
@@ -203,7 +203,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
         {
             if (arg < 0)
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentPropertyIsNegative, propertyName);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentPropertyIsNegative, propertyName);
                 throw new ArgumentException(message, parameterName);
             }
         }
@@ -222,7 +222,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
             if (string.IsNullOrEmpty(arg))
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentPropertyIsEmpty, propertyName);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentPropertyIsEmpty, propertyName);
                 throw new ArgumentException(message, parameterName);
             }
         }
@@ -242,7 +242,7 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel
 
             if (!(arg is T))
             {
-                var message = string.Format(CultureInfo.CurrentCulture, Resources.Error_ArgumentPropertyNotTypeOf, propertyName, typeof(T).FullName);
+                var message = string.Format(CultureInfo.CurrentCulture, ObjectModel.Resources.PrimitiveResources.Error_ArgumentPropertyNotTypeOf, propertyName, typeof(T).FullName);
                 throw new ArgumentException(message, parameterName);
             }
         }
